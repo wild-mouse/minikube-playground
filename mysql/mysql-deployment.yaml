@@ -1,38 +1,44 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: greeting-mysql
 spec:
   ports:
     - port: 3306
   selector:
-    app: mysql
+    app: greeting-mysql
   clusterIP: None
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: greeting-mysql
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: greeting-mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        app: greeting-mysql
     spec:
       containers:
         - image: mysql:5.6
-          name: mysql
+          name: greeting-mysql
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: password
+            - name: MYSQL_DATABASE
+              value: greeting
+            - name: MYSQL_USER
+              value: greeting_user
+            - name: MYSQL_PASSWORD
+              value: greeting
           ports:
             - containerPort: 3306
-              name: mysql
+              name: greeting-mysql
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
