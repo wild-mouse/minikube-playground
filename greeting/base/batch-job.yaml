@@ -12,3 +12,5 @@ spec:
   completions: 5
   parallelism: 3
   backoffLimit: 10
+
+# TODO add api, bff and frontend

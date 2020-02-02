@@ -1,0 +1,5 @@
+resources:
+  - api-deployment.yaml
+  - batch-job.yaml
+  - mysql-deployment.yaml
+  - mysql-pv.yaml
